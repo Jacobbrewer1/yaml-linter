@@ -23,6 +23,10 @@ runs:
     - name: 'Checkout repository'
       uses: 'actions/checkout@v3'
 
+    - name: 'Install yamllint'
+      run: sudo apt-get install -y yamllint
+      shell: bash
+
     - name: 'Lint YAML files'
       run: |
         ${{ github.action_path }}/lint-yaml.sh

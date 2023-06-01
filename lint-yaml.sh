@@ -36,3 +36,9 @@ if ! command -v yamllint &>/dev/null; then
   echo "yamllint could not be found, installing..."
   sudo apt-get install -y yamllint
 fi
+
+# Run yamllint
+# ------------
+
+# Run yamllint with the options set above and the path given as an argument when calling the script.
+yamllint "${options[@]}" ./ || exit 1
