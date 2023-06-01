@@ -1,0 +1,33 @@
+---
+name: 'Lint YAML files'
+description: 'Lint YAML files with yamllint'
+author: 'Jacobbrewer1'
+
+inputs:
+  fail_on_warnings:
+    description: 'Fail on warnings'
+    required: false
+    default: 'false'
+  ignore_warnings:
+    description: 'Only output errors, ignore warnings'
+    required: false
+    default: 'false'
+  config_file:
+    description: 'Path to custom config file'
+    required: false
+    default: './.yamllint'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Checkout repository'
+      uses: 'actions/checkout@v3'
+
+    - name: 'Lint YAML files'
+      run: |
+        ${{ github.action_path }}/lint-yaml.sh
+      shell: bash
+      env:
+        FAIL_ON_WARNINGS: ${{ inputs.fail_on_warnings }}
+        IGNORE_WARNINGS: ${{ inputs.ignore_warnings }}
+        CONFIG_FILE: ${{ inputs.config_file }}
